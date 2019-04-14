@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/dragdrop.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="display-4 text-center" style="font-size:3vw;">DIGITALIZACIÓN DE DOCUMENTOS</h1>
+        <!-- Form -->
+        <form action="/subir" method="POST" encType="multipart/form-data">
+            <div class="row">
+                <div class="col-sm">
+                    <!-- Material form contact -->
+                    <div class="card border-secondary rounded">
+
+                        <h5 class="card-header info-color text-white bg-secondary py-4">
+                            <strong>Datos del documento</strong>
+                        </h5>
+
+                        <!--Card content-->
+                        <div class="card-body px-lg-5 pt-1">
+
+                            <div class="form-row">
+                                <!-- NroDoc -->
+                                <div class="form-group col-md-6">
+                                    <label for="nroDoc">Nro. Doc. :</label>
+                                    <input type="text" id="nroDoc" name="nroDoc" class="form-control" required>
+                                </div>
+                                <!-- Folios -->
+                                <div class="form-group col-md-6">
+                                    <label for="folios">Folios</label>
+                                    <input type="number" id="folios" name="folios" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <!-- Origen -->
+                            <div class="md-form">
+                                <label for="origen">Origen</label>
+                                <input type="text" id="origen" name="origen" class="form-control" required>
+                            </div>
+
+                            <!-- Interesado -->
+                            <div class="md-form">
+                                <label for="interesado">Interesado</label>
+                                <input type="text" id="interesado" name="interesado" class="form-control" required>
+                            </div>
+
+                            <!-- Documento -->
+                            <div class="md-form">
+                                <label for="documento">Documento</label>
+                                <input type="text" id="documento" name="documento" class="form-control" required>
+                            </div>
+
+                            <!-- Asunto -->
+                            <div class="md-form">
+                                <label for="asunto">Asunto</label>
+                                <input type="text" id="asunto" name="asunto" class="form-control" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="tipo">Tipo Doc.</label>
+                                    <select name="tipo" id="tipo" class="form-control" required>
+                                        <option value="solicitud" selected>SOLICITUD</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="plazo">Plazo</label>
+                                    <input type="date" name="plazo" id="plazo" class="form-control" required>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- Material form contact -->
+                </div>
+                <div class="col-sm">
+                    <div class="form-group files">
+                        <label> Archivo </label>
+                        <input type="file" name="archivo" class="form-control" multiple="" accept=".pdf" required>
+                    </div>
+                    <!-- Send button -->
+                    <button
+                        class="btn bg-secondary text-white btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect"
+                        type="submit">Ingresar</button>
+                </div>
+            </div>
+        </form>
+        <!-- Form -->
+    </div>
+</body>
+
+</html>

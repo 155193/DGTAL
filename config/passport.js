@@ -48,7 +48,7 @@ module.exports = function(passport) {
             // if there are any errors, return the error
             if (err)
                 return done(err);
-
+            
             // check to see if theres already a user with that email
             if (user) {
                 return done(null, false, req.flash('signupMessage', 'La cuenta ya existe.'));
@@ -57,7 +57,6 @@ module.exports = function(passport) {
 				// if there is no user with that email
                 // create the user
                 var newUser            = new User();
-
                 // set the user's local credentials
                 newUser.local.username    = username;
                 newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
@@ -66,6 +65,13 @@ module.exports = function(passport) {
                 newUser.local.nombres      = req.body.nombres;
                 newUser.local.apellidos      = req.body.apellidos;
                 newUser.local.direccion      = req.body.dir || '';
+
+                /*var variable=newUser.validDni(req.body.dni,req.body.nombres,req.body.apellidos);
+                if(!variable){
+                    console.log(variable);
+                    
+                    return done(null, false, req.flash('signupMessage', 'Nombre no coincide con DNI en RENIEC'));
+                }*/
 				// save the user
                 newUser.save(function(err) {
                     if (err)

@@ -1,0 +1,95 @@
+.navbar {
+    background-color: rgb(30, 50, 88);
+}
+i {
+    padding-right: 8px;
+}
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(243, 243, 243);
+    overflow-x: hidden;
+    padding-top: 70px;
+}
+
+/* Style the sidenav links and the dropdown button */
+
+.sidenav a, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #444;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+/* On mouse-over */
+
+.sidenav a:hover, .dropdown-btn:hover {
+    color: rgb(253, 105, 101);
+}
+
+/* Main content */
+
+#main {
+    margin-left: 200px;
+    /* Increased text to enable scrolling */
+    padding: 70px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+
+.active {
+    background-color: inherit;
+    color: #444;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+
+.dropdown-container {
+    display: none;
+    background-color: inherit;
+    padding-left: 8px;
+    font-size: 12px;
+}
+
+/* Optional: Style the caret down icon */
+
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+.openbtn {
+    font-size: 14px;
+    cursor: pointer;
+    background-color: inherit;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+  }
+  .openbtn:hover {
+    background-color: #444;
+  }
+/* Some media queries for responsiveness */
+
+@media screen and (max-width: 500px) {
+    .sidenav {
+        padding-top: 70px;
+    }
+    .sidenav a, .dropdown-btn{
+        font-size: 14px;
+    }
+    .dropdown-container {
+        font-size: 12px;
+    }
+}

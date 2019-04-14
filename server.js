@@ -24,7 +24,7 @@ require('./config/passport')(passport); // pass passport for configuration
 //app.use(express.cookieParser()); // read cookies (needed for auth)
 app.use(fileUpload());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(session({ cookie: { maxAge: 60000 },
+app.use(session({ cookie: { maxAge: 3600000 },
                   secret: 'eypZAZy0CY^g9%KreypZAZy0CY^g9%Kr',
                   resave: false,
                   saveUninitialized: false}));
@@ -35,6 +35,7 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
+app.use(express.static(__dirname + '/public'));
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 

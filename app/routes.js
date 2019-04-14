@@ -56,12 +56,12 @@ module.exports = function(app, passport) {
 
 	//===========================================
 	//RUTAS SECRETARIA ===============================
-	app.get('/client/profile', isLoggedIn, function(req, res) {
-      res.render('profile.ejs',{
-        documentos: resultado
-      });
+	app.get('/client/profile', function(req, res) {
+      res.render('profile.ejs');
 	});
-
+	app.get('/client/digitalizar',(req,res)=>{
+		res.render('digitalizar.ejs');
+	});
 
 	//================================================
 	//RUTAS ADMIN ====================================
@@ -79,6 +79,11 @@ module.exports = function(app, passport) {
 		})
 	});
 
+	app.post('/subir',(req,res)=>{
+		console.log(req.body);
+		console.log(req.user);
+		res.redirect('/client/profile');
+	});
 
 	// =====================================
 	// LOGOUT ==============================
@@ -89,13 +94,3 @@ module.exports = function(app, passport) {
 	});
 };
 
-// route middleware to make sure
-function isLoggedIn(req, res, next) {
-
-	// if user is authenticated in the session, carry on
-	if (req.isAuthenticated()){
-		return next();
-	}
-	// if they aren't redirect them to the home page
-	res.redirect('/login');
-}
