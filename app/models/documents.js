@@ -1,6 +1,7 @@
 // app/models/document.js
 // load the things we need
 var mongoose = require('mongoose');
+var Schema=mongoose.Schema;
 
 // define the schema for our user model
 var documentSchema = mongoose.Schema({

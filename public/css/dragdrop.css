@@ -1,3 +1,6 @@
+.colord {
+    background-color: rgb(22, 115, 180);
+}
 .files input {
     outline: 2px dashed #92b0b3;
     outline-offset: -10px;

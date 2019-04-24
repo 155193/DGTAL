@@ -1,6 +1,10 @@
 // app/routes.js
 var auten= require('../controllers/authentication');
+var digital=require('../controllers/digitalizar');
+var busque=require('../controllers/busqueda');
+var profi=require('../controllers/autenprofile');
 var request=require('request');
+
 //var fs = require('fs'); para subir archivos
 //var formidable = require('formidable');
 //var pathParse = require('path-parse');
@@ -24,7 +28,7 @@ module.exports = function(app, passport) {
 
 	// process the login form
 	app.post('/login', passport.authenticate('local-login', {
-		successRedirect : '/client/profile', // redirect to the secure profile section
+		successRedirect : '/profile', // redirect to the secure profile section
 		failureRedirect : '/login', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 	}));
@@ -41,10 +45,12 @@ module.exports = function(app, passport) {
 
 	// process the signup form
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect : '/client/profile', // redirect to the secure profile section
+		successRedirect : '/profile', // redirect to the secure profile section
 		failureRedirect : '/signup', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 	}));
+
+	app.get('/profile',profi.profileautentification);
 
 	// =====================================
 	// DESPUES DEL LOGIN =========================
@@ -56,33 +62,46 @@ module.exports = function(app, passport) {
 
 	//===========================================
 	//RUTAS SECRETARIA ===============================
-	app.get('/client/profile', function(req, res) {
-      res.render('profile.ejs');
+	app.get('/client/profile', function(req, res) {		
+      res.render('profile.ejs',{
+		  cuenta: req.user.local
+	  });
 	});
 	app.get('/client/digitalizar',(req,res)=>{
 		res.render('digitalizar.ejs');
 	});
 
+	app.route('/client/busqueda')
+		.get((req,res)=>{
+			res.render('busqueda.ejs', {message: '' });
+		})
+		.post(busque.buscardocumento);
+
+
 	//================================================
 	//RUTAS ADMIN ====================================
 	app.post('/nombre',(req,res)=>{
-		request({
-			url: 'http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI='+req.body.dni,
-			json: false
-		}, function (error, response, body) {
-			if (!error && response.statusCode === 200) {
-				// Pintamos la respuesta JSON en navegador.
-				res.send(body.split("|"))
-			}else{
-				res.send([]);
-			}
-		})
+		try {
+			request({
+				url: 'http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI='+req.body.dni,
+				json: false
+			}, function (error, response, body) {
+				if (!error && response.statusCode === 200) {
+					// Pintamos la respuesta JSON en navegador.
+					res.send(body.split("|"))
+				}else{
+					res.send([]);
+				}
+			})	
+		} catch (error) {
+			next(error);
+		}
 	});
 
-	app.post('/subir',(req,res)=>{
-		console.log(req.body);
-		console.log(req.user);
-		res.redirect('/client/profile');
+	app.post('/subir',digital.subirdocumento);
+
+	app.get('/admin/profile',(req,res)=>{
+		res.send("p");
 	});
 
 	// =====================================

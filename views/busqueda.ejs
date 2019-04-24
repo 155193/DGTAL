@@ -1,0 +1,92 @@
+<div class="alert alert-danger" role="alert" id="bsalert">
+    <strong>Documento no encontrado!</strong> Porfavor revise bien los datos.
+</div>
+<div id="busqueda">
+    <div class="row">
+        <div class="col-12 col-md-12">
+            <form action="/client/busqueda" method="POST" id="formulario" class="border border-light p-3">
+                <p class="h4 mb-4 text-center">BUSQUEDA DE DOCUMENTOS</p>
+                <div class="form-inline">
+                    <label for="año" class="mr-sm-5">Año:</label>
+                    <input type="number" class="form-control mb-3" id="año" name="año">
+                </div>
+                <div class="form-inline">
+                    <label for="tipo" class="mr-sm-3">Tipo Doc.</label>
+                    <select name="tipo" id="tipo" class="form-control mr-sm-3" required>
+                        <option value="solicitud" selected>SOLICITUD</option>
+                        <option value="informe">INFORME</option>
+                        <option value="memorandum">MEMORANDUM</option>
+                        <option value="oficio">OFICIO</option>
+                        <option value="expediente">EXPEDIENTE</option>
+                        <option value="svalorada">SOLICITUD VALORADA</option>
+                        <option value="otros">OTROS</option>
+                    </select>
+                    <label for="nro" class="mr-sm-3">Nro Doc.:</label>
+                    <input type="text" class="form-control mr-sm-3" id="nro" placeholder="Nro Doc." name="nro" required>
+                    <button type="submit" id="buscar"><i class="fa fa-search"></i>Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead class="colord text-light">
+                <tr>
+                    <th scope="col">NRO</th>
+                    <th scope="col">FECHA</th>
+                    <th scope="col">PLAZO</th>
+                    <th scope="col">DOCUMENTO</th>
+                    <th scope="col">FOLIOS</th>
+                    <th scope="col">INTERESADO</th>
+                    <th scope="col">ORIGEN</th>
+                    <th scope="col">ASUNTO</th>
+                    <th scope="col">ESTADO</th>
+                    <th scope="col">OPERACIÓN</th>
+                </tr>
+            </thead>
+            <tbody id="rellenar">
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(() => {
+        $('#bsalert').hide();
+        var fecha = new Date();
+        var n = fecha.getFullYear();
+        $('#año').val(n);
+    });
+    $('#formulario').submit(function (event) {
+        event.preventDefault();
+        $('#bsalert').hide();
+        $('#rellenar tr').remove();
+        var form = $(this);
+        var url = form.attr('action');
+        $.ajax({
+            url: url,
+            method: "POST",
+            data: form.serialize()
+        }).done(function (datos) {
+            if (datos.length > 0) {
+                $.each(datos, (idx, tasks) => {
+                    var a=tasks.createdAt.split('-');
+                    a=a[2].slice(0,2)+'/'+a[1]+'/'+a[0];
+                    var b=tasks.local.plazo.split('-');
+                    b=b[2].slice(0,2)+'/'+b[1]+'/'+b[0];
+                    $('#rellenar').append(
+                        '<tr><td>' + tasks.local.nro_doc + '</td><td>' +
+                         a+ '</td><td>' + b+
+                        '</td><td>' + tasks.local.documento + '</td><td>' +
+                        tasks.local.folios + '</td><td>' + tasks.local.interesado +
+                        '</td><td>' + tasks.local.origen + '</td><td>' + tasks.local.asunto +
+                        '</td><td>' + tasks.local.estado + '</td><td>' +
+                        '<a href="" class="btn btn-danger">delete </a><a href="" class="btn btn-info">Edit </a>' +
+                        '</td></tr>'
+                    );
+                });
+            } else {
+                $('#bsalert').show();
+            }
+        });
+    });
+</script>

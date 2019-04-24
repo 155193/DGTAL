@@ -2,15 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/dragdrop.css">
 </head>
 
 <body>
     <div class="container">
-        <h1 class="display-4 text-center" style="font-size:3vw;">DIGITALIZACIÓN DE DOCUMENTOS</h1>
+        <h1 class="text-center h4 mb-4">DIGITALIZACIÓN DE DOCUMENTOS</h1>
         <!-- Form -->
         <form action="/subir" method="POST" encType="multipart/form-data">
             <div class="row">
@@ -18,7 +15,7 @@
                     <!-- Material form contact -->
                     <div class="card border-secondary rounded">
 
-                        <h5 class="card-header info-color text-white bg-secondary py-4">
+                        <h5 class="card-header info-color text-white py-4 colord">
                             <strong>Datos del documento</strong>
                         </h5>
 
@@ -47,19 +44,19 @@
                             <!-- Interesado -->
                             <div class="md-form">
                                 <label for="interesado">Interesado</label>
-                                <input type="text" id="interesado" name="interesado" class="form-control" required>
+                                <input type="text" id="interesado" name="interesado" class="form-control text-uppercase" required>
                             </div>
 
                             <!-- Documento -->
                             <div class="md-form">
                                 <label for="documento">Documento</label>
-                                <input type="text" id="documento" name="documento" class="form-control" required>
+                                <input type="text" id="documento" name="documento" class="form-control text-uppercase" required>
                             </div>
 
                             <!-- Asunto -->
                             <div class="md-form">
                                 <label for="asunto">Asunto</label>
-                                <input type="text" id="asunto" name="asunto" class="form-control" required>
+                                <input type="text" id="asunto" name="asunto" class="form-control text-uppercase" required>
                             </div>
 
                             <div class="form-row">
@@ -67,6 +64,12 @@
                                     <label for="tipo">Tipo Doc.</label>
                                     <select name="tipo" id="tipo" class="form-control" required>
                                         <option value="solicitud" selected>SOLICITUD</option>
+                                        <option value="informe">INFORME</option>
+                                        <option value="memorandum">MEMORANDUM</option>
+                                        <option value="oficio">OFICIO</option>
+                                        <option value="expediente">EXPEDIENTE</option>
+                                        <option value="svalorada">SOLICITUD VALORADA</option>
+                                        <option value="otros">OTROS</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -87,7 +90,7 @@
                     </div>
                     <!-- Send button -->
                     <button
-                        class="btn bg-secondary text-white btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect"
+                        class="btn colord text-white btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect"
                         type="submit">Ingresar</button>
                 </div>
             </div>
